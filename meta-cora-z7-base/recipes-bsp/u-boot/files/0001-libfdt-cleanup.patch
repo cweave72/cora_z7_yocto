@@ -1,0 +1,268 @@
+From 8fbddc9fc5f1d2930cc849d1a69c4495057aa239 Mon Sep 17 00:00:00 2001
+From: bellma <bellma@nowhere>
+Date: Fri, 28 Aug 2020 15:46:12 -0400
+Subject: [PATCH] libfdt cleanup
+
+---
+ include/image.h                      | 2 +-
+ lib/libfdt/fdt.c                     | 2 +-
+ lib/libfdt/fdt_region.c              | 7 ++++---
+ lib/libfdt/fdt_ro.c                  | 6 +++---
+ lib/libfdt/fdt_rw.c                  | 6 +++---
+ lib/libfdt/libfdt.h                  | 4 ++--
+ scripts/dtc/libfdt/fdt.c             | 4 ++--
+ scripts/dtc/libfdt/fdt_addresses.c   | 4 ++--
+ scripts/dtc/libfdt/fdt_empty_tree.c  | 4 ++--
+ scripts/dtc/libfdt/fdt_overlay.c     | 4 ++--
+ scripts/dtc/libfdt/fdt_ro.c          | 4 ++--
+ scripts/dtc/libfdt/fdt_rw.c          | 4 ++--
+ scripts/dtc/libfdt/fdt_strerror.c    | 4 ++--
+ scripts/dtc/libfdt/fdt_sw.c          | 4 ++--
+ scripts/dtc/libfdt/fdt_wip.c         | 4 ++--
+ scripts/dtc/libfdt/libfdt_internal.h | 2 +-
+ 16 files changed, 33 insertions(+), 32 deletions(-)
+
+diff --git a/include/image.h b/include/image.h
+index 49d73382ac..d844835b79 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -53,7 +53,7 @@ struct lmb;
+ 
+ #if IMAGE_ENABLE_FIT
+ #include <hash.h>
+-#include <libfdt.h>
++#include "libfdt.h"
+ #include <fdt_support.h>
+ # ifdef CONFIG_SPL_BUILD
+ #  ifdef CONFIG_SPL_CRC32_SUPPORT
+diff --git a/lib/libfdt/fdt.c b/lib/libfdt/fdt.c
+index 0958e6ba57..09bff8a06f 100644
+--- a/lib/libfdt/fdt.c
++++ b/lib/libfdt/fdt.c
+@@ -1,2 +1,2 @@
+-#include <linux/libfdt_env.h>
++#include "../../include/libfdt_env.h"
+ #include "../../scripts/dtc/libfdt/fdt.c"
+diff --git a/lib/libfdt/fdt_region.c b/lib/libfdt/fdt_region.c
+index 5bfc4da370..2aed97f0d7 100644
+--- a/lib/libfdt/fdt_region.c
++++ b/lib/libfdt/fdt_region.c
+@@ -5,11 +5,12 @@
+  * SPDX-License-Identifier:	GPL-2.0+ BSD-2-Clause
+  */
+ 
+-#include <libfdt_env.h>
++#include "../../include/libfdt_env.h"
++
+ 
+ #ifndef USE_HOSTCC
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ #else
+ #include "fdt_host.h"
+ #endif
+diff --git a/lib/libfdt/fdt_ro.c b/lib/libfdt/fdt_ro.c
+index 1be9538fd2..98115402f7 100644
+--- a/lib/libfdt/fdt_ro.c
++++ b/lib/libfdt/fdt_ro.c
+@@ -3,11 +3,11 @@
+  * Copyright (C) 2006 David Gibson, IBM Corporation.
+  * SPDX-License-Identifier:	GPL-2.0+ BSD-2-Clause
+  */
+-#include <libfdt_env.h>
++#include "../../include/libfdt_env.h"
+ 
+ #ifndef USE_HOSTCC
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ #else
+ #include "fdt_host.h"
+ #endif
+diff --git a/lib/libfdt/fdt_rw.c b/lib/libfdt/fdt_rw.c
+index 3dc775261f..54564fb116 100644
+--- a/lib/libfdt/fdt_rw.c
++++ b/lib/libfdt/fdt_rw.c
+@@ -3,11 +3,11 @@
+  * Copyright (C) 2006 David Gibson, IBM Corporation.
+  * SPDX-License-Identifier:	GPL-2.0+ BSD-2-Clause
+  */
+-#include <libfdt_env.h>
++#include "../../include/libfdt_env.h"
+ 
+ #ifndef USE_HOSTCC
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ #else
+ #include "fdt_host.h"
+ #endif
+diff --git a/lib/libfdt/libfdt.h b/lib/libfdt/libfdt.h
+index 6af94cb3f7..7ec6015e62 100644
+--- a/lib/libfdt/libfdt.h
++++ b/lib/libfdt/libfdt.h
+@@ -7,8 +7,8 @@
+  * SPDX-License-Identifier:     GPL-2.0+ BSD-2-Clause
+  */
+ 
+-#include <libfdt_env.h>
+-#include <fdt.h>
++#include "../../include/libfdt_env.h"
++#include "../../include/fdt.h"
+ 
+ #define FDT_FIRST_SUPPORTED_VERSION	0x10
+ #define FDT_LAST_SUPPORTED_VERSION	0x11
+diff --git a/scripts/dtc/libfdt/fdt.c b/scripts/dtc/libfdt/fdt.c
+index 22286a1aae..0053358cdf 100644
+--- a/scripts/dtc/libfdt/fdt.c
++++ b/scripts/dtc/libfdt/fdt.c
+@@ -50,8 +50,8 @@
+  */
+ #include "libfdt_env.h"
+ 
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ 
+ #include "libfdt_internal.h"
+ 
+diff --git a/scripts/dtc/libfdt/fdt_addresses.c b/scripts/dtc/libfdt/fdt_addresses.c
+index eff4dbcc72..446649ab7c 100644
+--- a/scripts/dtc/libfdt/fdt_addresses.c
++++ b/scripts/dtc/libfdt/fdt_addresses.c
+@@ -50,8 +50,8 @@
+  */
+ #include "libfdt_env.h"
+ 
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ 
+ #include "libfdt_internal.h"
+ 
+diff --git a/scripts/dtc/libfdt/fdt_empty_tree.c b/scripts/dtc/libfdt/fdt_empty_tree.c
+index f2ae9b77c2..a85de66859 100644
+--- a/scripts/dtc/libfdt/fdt_empty_tree.c
++++ b/scripts/dtc/libfdt/fdt_empty_tree.c
+@@ -50,8 +50,8 @@
+  */
+ #include "libfdt_env.h"
+ 
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ 
+ #include "libfdt_internal.h"
+ 
+diff --git a/scripts/dtc/libfdt/fdt_overlay.c b/scripts/dtc/libfdt/fdt_overlay.c
+index bd81241e66..a3491bf930 100644
+--- a/scripts/dtc/libfdt/fdt_overlay.c
++++ b/scripts/dtc/libfdt/fdt_overlay.c
+@@ -1,7 +1,7 @@
+ #include "libfdt_env.h"
+ 
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ 
+ #include "libfdt_internal.h"
+ 
+diff --git a/scripts/dtc/libfdt/fdt_ro.c b/scripts/dtc/libfdt/fdt_ro.c
+index 08de2cce67..b2c15ac9a0 100644
+--- a/scripts/dtc/libfdt/fdt_ro.c
++++ b/scripts/dtc/libfdt/fdt_ro.c
+@@ -50,8 +50,8 @@
+  */
+ #include "libfdt_env.h"
+ 
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ 
+ #include "libfdt_internal.h"
+ 
+diff --git a/scripts/dtc/libfdt/fdt_rw.c b/scripts/dtc/libfdt/fdt_rw.c
+index 5c3a2bb0bc..89092089dc 100644
+--- a/scripts/dtc/libfdt/fdt_rw.c
++++ b/scripts/dtc/libfdt/fdt_rw.c
+@@ -50,8 +50,8 @@
+  */
+ #include "libfdt_env.h"
+ 
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ 
+ #include "libfdt_internal.h"
+ 
+diff --git a/scripts/dtc/libfdt/fdt_strerror.c b/scripts/dtc/libfdt/fdt_strerror.c
+index 9677a1887e..371d584d4c 100644
+--- a/scripts/dtc/libfdt/fdt_strerror.c
++++ b/scripts/dtc/libfdt/fdt_strerror.c
+@@ -50,8 +50,8 @@
+  */
+ #include "libfdt_env.h"
+ 
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ 
+ #include "libfdt_internal.h"
+ 
+diff --git a/scripts/dtc/libfdt/fdt_sw.c b/scripts/dtc/libfdt/fdt_sw.c
+index 2bd15e7aef..a528d444be 100644
+--- a/scripts/dtc/libfdt/fdt_sw.c
++++ b/scripts/dtc/libfdt/fdt_sw.c
+@@ -50,8 +50,8 @@
+  */
+ #include "libfdt_env.h"
+ 
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ 
+ #include "libfdt_internal.h"
+ 
+diff --git a/scripts/dtc/libfdt/fdt_wip.c b/scripts/dtc/libfdt/fdt_wip.c
+index 5e85919862..5652af2643 100644
+--- a/scripts/dtc/libfdt/fdt_wip.c
++++ b/scripts/dtc/libfdt/fdt_wip.c
+@@ -50,8 +50,8 @@
+  */
+ #include "libfdt_env.h"
+ 
+-#include <fdt.h>
+-#include <libfdt.h>
++#include "fdt.h"
++#include "libfdt.h"
+ 
+ #include "libfdt_internal.h"
+ 
+diff --git a/scripts/dtc/libfdt/libfdt_internal.h b/scripts/dtc/libfdt/libfdt_internal.h
+index 02cfa6fb61..5cb817b365 100644
+--- a/scripts/dtc/libfdt/libfdt_internal.h
++++ b/scripts/dtc/libfdt/libfdt_internal.h
+@@ -50,7 +50,7 @@
+  *     OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  *     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+-#include <fdt.h>
++#include "fdt.h"
+ 
+ #define FDT_ALIGN(x, a)		(((x) + (a) - 1) & ~((a) - 1))
+ #define FDT_TAGALIGN(x)		(FDT_ALIGN((x), FDT_TAGSIZE))
+-- 
+2.17.1
+

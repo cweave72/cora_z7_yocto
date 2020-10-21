@@ -20,6 +20,7 @@
 MACHINE ?= "cora-zynq7"
 DL_DIR = "/home/user/netshare/yocto_dl"
 SSTATE_DIR = "/home/user/netshare/yocto_sstate"
+TMPDIR = "/home/user/yocto/cora-zynq7"
 #TMPDIR = "${TOPDIR}/tmp"
 
 DISTRO ?= "poky"
