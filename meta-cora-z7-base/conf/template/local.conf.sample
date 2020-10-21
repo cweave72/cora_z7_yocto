@@ -18,8 +18,8 @@
 # of emulated machines available which can boot and run in the QEMU emulator:
 #
 MACHINE ?= "cora-zynq7"
-DL_DIR = "/opt/oe/downloads"
-SSTATE_DIR = "/opt/oe/sstate-cache"
+DL_DIR = "/home/user/netshare/yocto_dl"
+SSTATE_DIR = "/home/user/netshare/yocto_sstate"
 #TMPDIR = "${TOPDIR}/tmp"
 
 DISTRO ?= "poky"
