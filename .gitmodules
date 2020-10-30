@@ -12,3 +12,6 @@
 	url = git://github.com/Xilinx/meta-xilinx/
 	branch = rel-v2018.2
     ignore = dirty
+[submodule "cora-z7-base"]
+	path = cora-z7-base
+	url = ../cora-z7-base

@@ -2,7 +2,7 @@
 
 # This script must be sourced.
 #
-TEMPLATECONF=$(pwd)/meta-cora-z7-base/conf/template 
+TEMPLATECONF=$(pwd)/cora-z7-base/meta-cora-z7-base/conf/template 
 source poky/oe-init-build-env build
 
 DL_DIR="$HOME/netshare/yocto_dl"
