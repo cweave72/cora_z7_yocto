@@ -11,9 +11,20 @@ $ cd cora_z7_yocto
 $ git submodule update --init
 ```
 
-### Initializing the build environment:
+### Initializing the build environment using the `init_build.sh` script:
 ```
-$ . init_build.sh
+$ . init_build.sh -h
+Script to initialize Yocto configuration (must be sourced).
+Usage:
+. init_build.sh [OPTIONS]
+Options:
+    -h --help         : Prints this message.
+    --dl_dir=PATH     : Path to desired DL_DIR location.
+    --sstate=PATH     : Path to desired SSTATE_DIR location.
+    --tmpdir=PATH     : Path to desired TMPDIR location (must not be a network share).
+
+Example
+$ . init_build.sh --dl_dir=tmp/yocto_dl --sstate=tmp/yocto_sstate --tmpdir=tmp/yocto_tmp
 ```
 
 ### Building the image:
