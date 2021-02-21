@@ -1,6 +1,6 @@
 # Building the Cora-z7 Yocto image
 
-This repository provides the workspace for building the Yocto Linux image for the Digilent Cora Z7-10.
+This repository provides the workspace for building an example Yocto Linux image for the Digilent Cora Z7-10.
 
 ## Steps:
 
@@ -10,6 +10,10 @@ $ git clone https://github.com/cweave72/cora_z7_yocto.git
 $ cd cora_z7_yocto
 $ git submodule update --init
 ```
+
+### Using a docker container to build.
+
+See https://github.com/cweave72/yocto_docker for a Ubuntu image for yocto builds.
 
 ### Initializing the build environment using the `init_build.sh` script:
 ```
@@ -69,6 +73,13 @@ bitbake coraz7-image-base
     - `$ umount ~/sdcard/boot ~/sdcard/rootfs`
 - Insert the sdcard and run.
 
+## Connecting to the board.
+
+The meta-cora-z7-base layer provides for an eth0 dhcp interface. You can connect via serial via:
+```
+minicom -b115200 -D/dev/ttyUSB1
+```
+Once you know the ip address assigned, you can ssh via: `ssh root@<ip>`. The root login is passwordless.
 
 ## Useful bitbake commands:
 

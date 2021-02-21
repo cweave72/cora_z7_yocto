@@ -55,16 +55,18 @@ for arg in "$@"; do
     esac
 done
 
+CONF=$(pwd)/cora-z7-base/meta-cora-z7-base/conf/template 
+
 echo "Using:"
 echo "---------------------
+echo "TEMPLATECONF=$CONF"
 echo "DL_DIR=$DL_DIR"
 echo "SSTATE_DIR=$SSTATE_DIR"
 echo "TMPDIR=$TMPDIR"
 echo "---------------------
 confirm || return
 
-TEMPLATECONF=$(pwd)/cora-z7-base/meta-cora-z7-base/conf/template 
-source poky/oe-init-build-env build
+TEMPLATECONF=$CONF source poky/oe-init-build-env build
 
 LOCAL_CONF=conf/local.conf
 
