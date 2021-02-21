@@ -23,6 +23,7 @@ Usage:
 . init_build.sh [OPTIONS]
 Options:
     -h --help         : Prints this message.
+    -p --printenv     : Prints env variables.
     --dl_dir=PATH     : Path to desired DL_DIR location.
     --sstate=PATH     : Path to desired SSTATE_DIR location.
     --tmpdir=PATH     : Path to desired TMPDIR location (must not be a network share).
@@ -30,6 +31,13 @@ Options:
 Example
 $ . init_build.sh --dl_dir=tmp/yocto_dl --sstate=tmp/yocto_sstate --tmpdir=tmp/yocto_tmp
 ```
+Once initialized, you will be placed in the `build/` directory and can proceed to building the image.
+
+Note: You only need to provide the paths `--dl_dir`, `--sstate` and `--tmpdir` once on initialization.  Subsequent invocations may simply be:
+```
+. init_build.sh
+```
+Previous settings will be recalled. To change parameters, rerun the full command with modified paths.
 
 ### Building the image:
 Minimal image:
